@@ -1,8 +1,8 @@
-POST http://localhost:3003/api/blogs
+POST http://localhost:3003/api/blogs/659f33a0cb7d25fe92a433c6
 Content-Type: application/json
 
 {
-  "title": "testy testy",
+  "title": "get things done quick # 2",
   "author": "losty losty",
   "url": "wwwgooglcomhere",
   "likes": 1000
