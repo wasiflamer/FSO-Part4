@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "eample",
-  "author": "losty",
-  "url": "www.googl.com/here",
+  "title": "testy testy",
+  "author": "losty losty",
+  "url": "wwwgooglcomhere",
   "likes": 1000
 }
