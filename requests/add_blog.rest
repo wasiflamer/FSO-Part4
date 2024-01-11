@@ -2,8 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "get things done",
-  "author": "Waseem",
-  "url": "www.googlelink.com/here",
-  "likes": 100000
+  "title": "eample",
+  "author": "losty",
+  "url": "www.googl.com/here",
+  "likes": 1000
 }
