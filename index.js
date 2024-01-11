@@ -1,11 +1,6 @@
-// library for speeding server production
 const express = require("express");
 const app = express();
-
-// security policy
 const cors = require("cors");
-
-// library for interacting with mongo db atlas
 const mongoose = require("mongoose");
 
 const blogSchema = new mongoose.Schema({
@@ -17,30 +12,34 @@ const blogSchema = new mongoose.Schema({
 
 const Blog = mongoose.model("Blog", blogSchema);
 
-const mongoUrl = "mongodb://localhost/bloglist";
-mongoose.connect(mongoUrl);
+const mongoUrl =
+  "mongodb+srv://zenlooper1:B1FXE440eodBhsNm@cluster0.1sev2ah.mongodb.net/?retryWrites=true&w=majority";
+mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true });
 
-// using the above exported libraries
 app.use(cors());
 app.use(express.json());
 
-// get all
-app.get("/api/blogs", (request, response) => {
-  Blog.find({}).then((blogs) => {
+app.get("/api/blogs", async (request, response) => {
+  try {
+    const blogs = await Blog.find({});
     response.json(blogs);
-  });
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-// save blog
-app.post("/api/blogs", (request, response) => {
-  const blog = new Blog(request.body);
-
-  blog.save().then((result) => {
+app.post("/api/blogs", async (request, response) => {
+  try {
+    const blog = new Blog(request.body);
+    const result = await blog.save();
     response.status(201).json(result);
-  });
+  } catch (error) {
+    console.error("Error saving blog:", error);
+    response.status(500).json({ error: "Internal Server Error" });
+  }
 });
 
-// required port
 const PORT = 3003;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
