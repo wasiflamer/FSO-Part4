@@ -18,3 +18,17 @@ module.exports = {
   dummy,
   totalLikes,
 };
+
+// most liked blog
+const favoriteBlog = (blogs) => {
+  // find the largest
+  let maxNumber = -Infinity;
+
+  for (let i = 0; i < blogs.length; i++) {
+    if (blogs[i].likes > maxNumber) {
+      indeOFHighest = i;
+    }
+  }
+
+  return indeOFHighest;
+};
