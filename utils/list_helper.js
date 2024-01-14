@@ -14,21 +14,25 @@ const totalLikes = (blogs) => {
   return blogs.length == 0 ? 0 : sumOfAll;
 };
 
-module.exports = {
-  dummy,
-  totalLikes,
-};
-
 // most liked blog
 const favoriteBlog = (blogs) => {
-  // find the largest
-  let maxNumber = -Infinity;
+  let maxLikes = -Infinity;
+  let indexOfHighest = -1;
 
   for (let i = 0; i < blogs.length; i++) {
-    if (blogs[i].likes > maxNumber) {
-      indeOFHighest = i;
+    if (blogs[i].likes > maxLikes) {
+      maxLikes = blogs[i].likes;
+      indexOfHighest = i;
     }
   }
 
-  return indeOFHighest;
+  // Omitting _id, __v, and url from the result
+  const { _id, __v, url, ...result } = blogs[indexOfHighest];
+  return result;
+};
+
+module.exports = {
+  dummy,
+  totalLikes,
+  favoriteBlog,
 };
