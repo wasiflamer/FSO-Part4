@@ -11,7 +11,7 @@ const totalLikes = (blogs) => {
     sumOfAll += blogs[i].likes;
   }
 
-  return sumOfAll;
+  return blogs.length == 0 ? 0 : sumOfAll;
 };
 
 module.exports = {

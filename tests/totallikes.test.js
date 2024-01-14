@@ -1,6 +1,8 @@
 const listHelper = require("../utils/list_helper");
 
 describe("total likes", () => {
+  const emptylist = [];
+
   const listWithOneBlog = [
     {
       _id: "5a422aa71b54a676234d17f8",
@@ -38,6 +40,11 @@ describe("total likes", () => {
       __v: 3,
     },
   ];
+
+  test("when list is empty ", () => {
+    const result = listHelper.totalLikes(emptylist);
+    expect(result).toBe(0);
+  });
 
   test("when list has only one blog, equals the likes of that", () => {
     const result = listHelper.totalLikes(listWithOneBlog);
