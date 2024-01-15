@@ -1,3 +1,6 @@
+// Load the full build.
+var Lodash = require("lodash");
+
 const dummy = (blogs) => {
   return 1;
 };
@@ -31,8 +34,20 @@ const favoriteBlog = (blogs) => {
   return result;
 };
 
+// author with most blogs
+const mostBlogs = (blogs) => {
+  const authorWithMostBlogs = Lodash.chain(blogs)
+    .countBy("author")
+    .toPairs()
+    .maxBy(Lodash.last)
+    .thru((pair) => ({ author: pair[0], blogs: pair[1] }))
+    .value();
+  return authorWithMostBlogs;
+};
+
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
+  mostBlogs,
 };
