@@ -1,17 +1,20 @@
-const mongoose = require('mongoose')
-const supertest = require('supertest')
-const app = require('../app') 
+const mongoose = require("mongoose");
+const supertest = require("supertest");
+const app = require("../app");
+const api = supertest(app);
 
-const api = supertest(app)
-
-// is_json 
-test('blogs are returned as json', async () => {
+test("blogs are returned as json", async () => {
   await api
-    .get('/api/blogs')
+    .get("/api/blogs")
     .expect(200)
-    .expect('Content-Type', /application\/json/)
-}, 100000)
+    .expect("Content-Type", /application\/json/);
+}, 100000);
+
+test("correctly identifies number of blog posts", async () => {
+  const response = await api.get("/api/blogs");
+  expect(response.body).toHaveLength(2);
+});
 
 afterAll(async () => {
-  await mongoose.connection.close()
-})
+  await mongoose.connection.close();
+});
