@@ -2,7 +2,7 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "get things done quick # 2",
+  "title": "get things done quick # 6",
   "author": "losty losty",
   "url": "wwwgooglcomhere",
   "likes": 1000

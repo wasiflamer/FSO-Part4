@@ -6,12 +6,6 @@ blogsRouter.get("/", async (request, response) => {
   const blogs = await Blog.find({});
   response.json(blogs);
 });
-// blogsRouter.get("/", (request, response) => {
-//   Blog.find({}).then((blogs) => {
-//     response.json(blogs);
-
-//   });
-// });
 
 // get specifc blogs | router
 blogsRouter.get("/:id", (request, response, next) => {
@@ -27,7 +21,7 @@ blogsRouter.get("/:id", (request, response, next) => {
 });
 
 // save blog | router
-blogsRouter.post("/", (request, response, next) => {
+blogsRouter.post("/", async (request, response) => {
   const body = request.body;
 
   const blog = new Blog({
@@ -37,22 +31,14 @@ blogsRouter.post("/", (request, response, next) => {
     likes: body.likes,
   });
 
-  blog
-    .save()
-    .then((savedBlog) => {
-      response.json(savedBlog);
-    })
-    .catch((error) => next(error));
+  const savedBlog = await blog.save();
+  response.status(201).json(savedBlog);
 });
 
 // delete specific blog  | router
-
-blogsRouter.delete("/:id", (request, response, next) => {
-  Blog.findByIdAndDelete(request.params.id)
-    .then(() => {
-      response.status(204).end();
-    })
-    .catch((error) => next(error));
+blogsRouter.delete("/:id", async (request, response) => {
+  await Blog.findByIdAndDelete(request.params.id);
+  response.status(204).end();
 });
 
 // update specific blog | router
