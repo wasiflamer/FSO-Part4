@@ -92,6 +92,26 @@ test("responds with 400 Bad Request if url is missing", async () => {
   expect(response.status).toBe(400);
 });
 
+// deleting a single resource
+test("can delete a single resource", async () => {
+  let eample_id = "65bd183c5e93f476576fd45c";
+  const response = await api.delete(`/api/blogs/${eample_id}`).send();
+  expect(response.status).toBe(204);
+});
+
+// deleting a single resource
+test("can update a single resource", async () => {
+  const updatedpost = {
+    title: "te2st",
+    author: "waseem",
+    likes: 12,
+  };
+
+  let eample_id = "65bd183c5e93f476576fd45e";
+  const response = await api.put(`/api/blogs/${eample_id}`).send(updatedpost);
+  expect(response.status).toBe(200);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
