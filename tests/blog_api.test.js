@@ -45,6 +45,53 @@ test("successfully creates a new blog post.", async () => {
   expect(response.body.likes).toBe(newBlogData.likes);
 });
 
+// do like propery exist ?
+test("like propery exists ", async () => {
+  const newBlogData = {
+    title: "test",
+    author: "waseem",
+    url: "pooze",
+    likes: 0,
+  };
+
+  const response = await api.post("/api/blogs").send(newBlogData);
+
+  // Check if the response is successful (status code 201)
+  expect(response.status).toBe(201);
+
+  // Check if the 'likes' property is present in the response
+  expect(response.body).toHaveProperty("likes");
+
+  // Check if the 'likes' property defaults to 0
+  expect(response.body.likes).toBe(0);
+});
+
+test("responds with 400 Bad Request if title is missing", async () => {
+  const newBlogData = {
+    author: "waseem",
+    url: "pooze",
+    likes: 0,
+  };
+
+  const response = await api.post("/api/blogs").send(newBlogData);
+
+  // Check if the response is 400 Bad Request
+  expect(response.status).toBe(400);
+});
+
+test("responds with 400 Bad Request if url is missing", async () => {
+  const newBlogData = {
+    title: "test",
+    author: "waseem",
+    likes: 0,
+  };
+
+  const response = await api.post("/api/blogs").send(newBlogData);
+
+  // Check if the response is 400 Bad Request
+  expect(response.status).toBe(400);
+});
+
 afterAll(async () => {
   await mongoose.connection.close();
 });
