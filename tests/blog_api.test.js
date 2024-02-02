@@ -19,8 +19,8 @@ test("correctly identifies number of blog posts", async () => {
 // unique identifier property of the blog posts is named id
 test("unique identifier property of the blog posts is named id", async () => {
   const response = await api.get("/api/blogs");
-  console.log(response.body);
-  expect(response.body).toBeDefined("id");
+  // console.log(response.body[0].title);
+  expect(response.body[0].id).toBeDefined();
 });
 
 afterAll(async () => {
