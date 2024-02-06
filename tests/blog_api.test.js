@@ -99,7 +99,7 @@ test("can delete a single resource", async () => {
   expect(response.status).toBe(204);
 });
 
-// deleting a single resource
+// updating a single resource
 test("can update a single resource", async () => {
   const updatedpost = {
     title: "te2st",
