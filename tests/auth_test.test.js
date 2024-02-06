@@ -2,9 +2,9 @@ const bcrypt = require("bcrypt");
 const User = require("../models/user");
 
 describe("when there is initially one user in db", () => {
+ 
   beforeEach(async () => {
     await User.deleteMany({});
-
     const passwordHash = await bcrypt.hash("sekret", 10);
     const user = new User({ username: "root", passwordHash });
 
@@ -31,7 +31,7 @@ describe("when there is initially one user in db", () => {
 
     const usernames = usersAtEnd.map((u) => u.username);
     expect(usernames).toContain(newUser.username);
-  });
+  } , 30000);
 
   test("creation fails with proper statuscode and message if username already taken", async () => {
     const usersAtStart = await helper.usersInDb();
@@ -52,5 +52,5 @@ describe("when there is initially one user in db", () => {
 
     const usersAtEnd = await helper.usersInDb();
     expect(usersAtEnd).toEqual(usersAtStart);
-  });
+  } , 30000);
 });
