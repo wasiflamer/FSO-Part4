@@ -20,6 +20,30 @@ usersRouter.post("/", async (request, response) => {
     passwordHash,
   });
 
+  // username must be given
+  if (!username) {
+    response.status(400).json({ error: "username missing" });
+  }
+
+  // must be three charaters long
+  if (username.length < 3) {
+    response
+      .status(400)
+      .json({ error: "username must be three characters long " });
+  }
+
+  // password must be given
+  if (!password) {
+    response.status(400).json({ error: "password is missing ! " });
+  }
+
+  // must be three charaters long
+  if (password.length < 3) {
+    response
+      .status(400)
+      .json({ error: "password must be three characters long " });
+  }
+
   const savedUser = await user.save();
 
   response.status(201).json(savedUser);
