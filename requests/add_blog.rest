@@ -2,8 +2,9 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-  "title": "get things done quick # 6",
-  "author": "losty losty",
-  "url": "wwwgooglcomhere",
-  "likes": 1000
+  "title": "is linking works ? ",
+  "author": "king is bling ",
+  "url": "www.g.com",
+  "likes": 1000,
+  "userId" : "65c36d23da771edfc8582861"
 }
